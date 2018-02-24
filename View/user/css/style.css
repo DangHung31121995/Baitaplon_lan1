@@ -1,0 +1,74 @@
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:focus, a:hover{
+	text-decoration:none;
+}
+
+a:active  {
+    text-decoration: none;
+}
+
+.heading{
+	margin-top: 10px;
+}
+.signup_forgot{
+	margin-left: 20px;
+}
+.form-login{
+	margin-top: 10px;
+}
+li.nav-item{
+	padding-left: 15px;
+	font-weight: bold;
+	color: white;
+}
+
+form.form-row.col-md-7.form-login {
+	margin-top: 35px;
+	padding-left: 90px;
+}
+
+
+
+.container.booking {
+	margin-top: 25px;
+}
+.typehotel{
+	
+	font-size: 15px;
+	font-weight: bold;
+}
+.bottom{
+	margin-top: 50px;
+}
+
+.row.thongtinlienhe {
+    margin-top: 40px;
+    margin-left: 2px;
+}
+
+table {
+    margin-top: 10px;
+
+}
+
+.container.footer {
+    margin-bottom: 30px;
+}
+
+.row.form-step1 {
+    margin-top: 30px;
+}
+
+.fullcontainer.content {
+    margin-top: 40px;
+}
+.container.content {
+    margin-top: 40px;
+}

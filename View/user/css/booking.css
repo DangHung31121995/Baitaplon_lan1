@@ -1,0 +1,67 @@
+a{
+   text-decoration: none !important;
+}
+
+.content{
+      border: 1px solid #red;;
+     
+}
+.divbookroom .linenumber {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-left: 8%;
+}
+      .divbookroom .linenumber .num {
+            float: left;
+            width: 30px;
+            height: 30px;
+            background: #d0d0d0;
+            color: #fff;
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 20px;
+            display: inline-block;
+            text-align: center;
+            font: bold 18px/30px Arial;
+      }
+            .divbookroom .linenumber .num.last {
+                  background: #474747;
+            }
+
+            .divbookroom .linenumber .num.active {
+                  background: #dab067;
+            }
+
+      .divbookroom .linenumber .text {
+            float: left;
+            color: #9d9d9d;
+            font: normal 11px Arial;
+            text-transform: uppercase;
+            padding: 0px 15px 3px 4px;
+            border-bottom: 1px solid #d0d0d0;
+            width: 150px;
+      }
+
+            .divbookroom .linenumber .text.active {
+              color: #b68d47;
+              border-bottom: 1px solid #dab067;
+            }
+#btnStep1{
+  padding: 0 13px;
+  height: 32px;
+  font: normal 14px/32px Arial;
+  background: #ba8b39;
+  color: #fff;
+  display: inline-block;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-left: 40px;
+}
+
+
+.row.divbookroom {
+  smargin-top: 25px;
+    margin-left: 18%;
+}
