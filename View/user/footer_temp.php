@@ -1,18 +1,18 @@
 <div class ="container footer">
 		<div class="row" style="    margin-top: 50px;">
 			<div class="col-md-5">
-				<img src="View/user/images/mt-map.png" class="img-responsive" alt="">
+				<a href="?controller=viewhotel"><img src="View/user/images/mt-map.png" class="img-responsive" alt=""></a>
 			</div>
 			<div class="col-md-7">
 				<div class="row">
 					<div class="col-md-4">
-						<a class="typehotel" href="#"  >CURTISS LUXURY </a>
+						<a class="typehotel" href="?controller=viewhotel&action=luxury"  >CURTISS LUXURY </a>
 					</div>
 					<div class="col-md-4">
-						<a class="typehotel" href="#"  >CURTISS GRAND </a>
+						<a class="typehotel" href="?controller=viewhotel&action=grand"  >CURTISS GRAND </a>
 					</div>
 					<div class="col-md-4">
-						<a class="typehotel" href="#">CURTISS HOLIDAY </a>
+						<a class="typehotel" href="?controller=viewhotel&action=holiday">CURTISS HOLIDAY </a>
 					</div>
 				</div>
 
@@ -96,7 +96,7 @@
 	        type : 'POST', 
 	        // url  : 'View/user/login.php', //gửi dữ liệu sang trang dieu huong này
 	        url: '?controller=viewaccount&action=signin',
-	        dataType : 'text',
+	        dataType : 'json',
 	        data : {
 	        	user:username,
 	        	password:password

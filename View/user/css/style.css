@@ -72,3 +72,18 @@ table {
 .container.content {
     margin-top: 40px;
 }
+
+h2.tieude {
+    color: darkred;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+p.noidung {
+    text-align: justify;
+}
+
+a.btn.btn-primary.btnaccount {
+    margin-top: 20px;
+}
+

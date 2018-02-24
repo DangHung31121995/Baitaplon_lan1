@@ -9,17 +9,3 @@
    $new_controller_object = new $controller_name();
     $new_controller_object->run();
  ?>
-
-<!--
- //session_start();
-  //if($_SERVER['REQUEST_METHOD'] === 'POST')
-  {
-   
-  }
-  //else
-  {
-   // include __DIR__.'/html_file.php';
-  }
-  //print_r ($_SESSION['admin_name']);
-  // echo ($_SESSION['admin_name']);
-//?

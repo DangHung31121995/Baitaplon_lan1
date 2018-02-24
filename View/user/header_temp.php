@@ -34,7 +34,7 @@
 <div class="container">
 	<div class="row heading">
 		<div class="col-md-5">
-			<img  src="View/user/images/logohotel1.png" class="img-responsive" alt="Cinque Terre" style="width: 70%;height: 70%;">
+			<a href="?controller=trangchu"><img  src="View/user/images/logohotel1.png" class="img-responsive" alt="Cinque Terre" style="width: 70%;height: 70%;"></a>
 		</div>
 
 		<?php
@@ -86,7 +86,7 @@
 	
 	<div class="row">
 		<nav class=" container navbar navbar-expand-lg navbar-light  " style="background-color: #e3f2fd;">
-			<h2 class="nav navbar-nav text-primary">CURTISSS</h2>
+			<a href="?controller=trangchu"><h2 class="nav navbar-nav " style=" text-shadow: 2px 2px #441e1e; color: red;" >Curtiss Hotel</h2></a>
 
 			<div class="collapse navbar-collapse" style="margin-left:350px">
 				<ul class="navbar-nav">

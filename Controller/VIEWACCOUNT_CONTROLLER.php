@@ -72,32 +72,42 @@ class VIEWACCOUNT_CONTROLLER{
 		        }
 				break;
 			case 'signin':
-
-			if(!empty($_POST['user']))
-			{
-				$username = trim($_POST['user']);
-				$password = trim($_POST['password']);
-   				 //neu dang nhap dung
-
-				if($username == 'a' && $password == 'b')
+				if(!empty($_POST['user']))
 				{
-					$array = array(
-						'check'=>true,
-						'user'=>$username,
-						'mess'=>'ok'
-					);
-					
-					print json_encode($array);
+					$username = trim($_POST['user']);
+					$password = trim($_POST['password']);
+	   				 //neu dang nhap dung
 
-				}else{
-					$array = array(
-						'check'=>false,
-						'mess'=>'sai user hoac password'
-					);
-					print json_encode($array);
+					if($username == 'a' && $password == 'b')
+					{
+						$array = array(
+							'check'=>true,
+							'user'=>$username,
+							'mess'=>'ok'
+						);
+						session_start();
+						$_SESSION['user']=$username;
+						print json_encode($array);
+
+					}else{
+						$array = array(
+							'check'=>false,
+							'mess'=>'sai user hoac password'
+						);
+						print json_encode($array);
+					}
 				}
-			}
 				break;
+			case 'signout':
+				session_start();
+				unset($_SESSION['user']);
+          		header('Location: ?controller=trangchu');
+				break;
+			case 'myaccount':
+				require_once("View/user/myaccount.php");
+				# code...
+				break;
+
 			default:
 				# code...
 				break;
