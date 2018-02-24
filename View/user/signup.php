@@ -21,8 +21,8 @@
       <br>
       <label for="GioiTinh">Giới Tính<br>
         <div style="margin-left:100px">
-          <input type="radio" name="sex" id="sex" value="Nam">Nam
-          <input type="radio" name="sex" id="sex" value="Nữ" style="margin-left:50px">Nữ
+          <input type="radio" name="sex" id="sex1" value="Nam">Nam
+          <input type="radio" name="sex" id="sex0" value="Nữ" style="margin-left:50px">Nữ
         </div>
       </label>
       <br>
