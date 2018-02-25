@@ -2,12 +2,17 @@
 require_once('Model/data_entity.php');
 
 class roomtype_model{
+	var $conn;
+    public function __construct(){
+      $this->conn=mysqli_connect('localhost','root','')or die('khong the ket noi');
+      mysqli_select_db($this->conn,'roombooking');
+    }
 
 	public function select(){
-		require_once('connect.php');
+		
 
 		$sql= 'select * from roomtype';
-		$result=mysqli_query($conn,$sql);
+		$result=mysqli_query($this->conn,$sql);
 		$roomtypes=array();
  		if($result){
 			while($row = mysqli_fetch_array($result)){
@@ -19,6 +24,25 @@ class roomtype_model{
 		else{
 			print("room type model - slect:  loi");
 		}
+	}
+	public function getType($idHotel){
+
+		$query = " SELECT DISTINCT t.* from roomtype as t JOIN room as r on r.roomType=t.id where r.idHotel = $idHotel ";
+		$result=mysqli_query($this->conn,$query);
+		$roomtypes=array();
+
+ 		if(mysqli_num_rows($result)){
+			while($row = mysqli_fetch_array($result)){
+				$type = new data_entity($row);
+				$roomtypes[]=$type;
+			}
+			return $roomtypes;
+		}
+		else{
+			print("room type model - slect:  loi");
+			return $roomtypes;
+		}
+
 	}
 	public function GetDetailHotel($id) {
 		$mySQL = "SELECT * FROM hotel WHERE id={$id}";

@@ -22,7 +22,7 @@
 			<table class="table" style=" width:70%; margin-left:10%">
 				<tr>
 					<td width="30%">Thành phố</td>
-					<td id='step2_thanhpho' width="70%">
+					<td id='step2_city' width="70%">
 						<?php
 							print($id_city);
 						?></td>
@@ -30,12 +30,13 @@
 				</tr>
 				<tr>
 					<td width="30%">Khách sạn</td>
-					<td id='step2_tinh' width="70%">A</td>
+					<td id='step2_hotel' width="70%"><?php print($id_hotel); ?></td>
 				</tr>
 				<tr>
 					<td >Thời gian</td>
-					<td >
-					
+					<td  >
+						<p hidden id = "startDate"> <?php print($startDatetime); ?></p> 
+						<p hidden id = "endDate"> <?php print($endDatetime); ?></p> 
 						<?php
 						 	print($startDate.' - '.$endDate);
 						?>
@@ -61,7 +62,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($types as $key=>$val) {?>
+					<?php $i = 1; foreach ($types as $key=>$val) {?>
 						
 					<tr>
 						<td>
@@ -69,8 +70,9 @@
 								<img src="<?php print($val->image); ?>" style="width:80px;height:80px;" alt="">
 							</div>
 							<div class="text_room" style="margin-left: 100px;">
-								<p style="font-weight: bold;"><?php echo $val->typeName; ?></p>
+								<p style="font-weight: bold;"><?php echo $val->typeName; print(' -- id: '.$val->id); ?></p>
 								<p><?php print($val->typeDescription); ?></p>
+
 							</div>
 						</td>
 						<td>
@@ -83,20 +85,70 @@
 							<?php echo $val->totalPeople; ?>
 						</td>
 						<td>
-							so luong x
+							<?php
+									$id_select_type="select_type_".$i;
+									
+									# code...
+									$check =false;
+									$num=0;
+									foreach ($countType as $key => $value) {
+										# code...
+										
+										if($value->roomType == $val->id){
+											$check=true;
+											$num=$value->num;
+										}
+									}
+
+									if($check==true){
+
+										
+										?>
+
+										<select class="form-control numType" id ="<?php print($id_select_type); ?>" name="<?php print($id_select_type); ?>"">
+
+										<?php
+
+										for($j=0; $j<=$num; $j++){
+
+										?>
+										<option  value="<?php echo $j; ?>" > <?php echo $j; ?> </option>
+										<?php
+										}
+
+									}
+									else{
+										print("Hết Phòng");
+									}
+							?>
 						</td>
 					</tr>
 
 
-					<?php } ?>
+					<?php 
+					$i=$i+1;
+				}
+
+				 ?> <!-- endfor php types -->
 					
 				</tbody>
 			</table>
 
-			<a class="btn btn-primary" id="btnStep2" href="?controller=viewbooking&action=step3"  style="margin-left: 48%">step3</a>
+			<a class="btn btn-primary" id="btnStep2" href="javascript:void(0);"  style="margin-left: 48%">step3</a>
 
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$("#btnStep2").click(function(){
+		// var value = $('.numType option:selected ').val();
+		// alert(value);
+	});
+	$('.numType').change(function(){
+		var value =$('.numType option:selected ').val();
+		alert(val);
+	})
+</script>>
+
 
 <?php include('footer_temp.php') ?>

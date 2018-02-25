@@ -1,7 +1,10 @@
 <?php
-
+require_once('Model/booking_model.php');
 class VIEWBOOKING_CONTROLLER{
-
+  var $model;
+  public function __construct(){
+      $this->model=new booking_model();
+    }
 	public function run(){
     
 		$action = isset($_GET['action'])?$_GET['action']:'';
@@ -10,6 +13,14 @@ class VIEWBOOKING_CONTROLLER{
  
   		switch($action){
   			case 'step1':
+          // $a=array( 1,4,10,12);
+          // $idroomidType = $this->model->getIdRoomIdType(2,8,10);
+          // foreach ($idroomidType as $key => $value) {
+          //   # code...
+
+          //     print("a ".$value->roomType);
+          //   }
+          // }
   				require_once('View/user/booking1.php');
           
   				break;
@@ -27,7 +38,7 @@ class VIEWBOOKING_CONTROLLER{
               $id_hotel=$_POST['select_hotel'];
               //xu ly ngay thang
               $date=$_POST['daterange'];
-          
+              
 
               $date = explode(' - ',$date);//cat chuot
               $startDate = $date[0];
@@ -45,20 +56,25 @@ class VIEWBOOKING_CONTROLLER{
 
               $totalNight= ($endDatetime -$startDatetime)/$timeADay;
 
-              print("<p>post id_hotel: ".$id_hotel.'</p>'); 
-              print("<p>post city: ".$id_city.'</p>'); 
-              print('<p>startDate: '.$startDatetime.'</p>');
-              print('<p>startDate: '.$newformat.'</p>');
-              print('<p>endDate: '.$endDate.'</p>');
-              print('<p>totalNight: '.$totalNight.'</p>');
+              // print("<p>post id_hotel: ".$id_hotel.'</p>'); 
+              // print("<p>post city: ".$id_city.'</p>'); 
+              // print('<p>startDate: '.$startDatetime.'</p>');
+              // print('<p>startDate: '.$newformat.'</p>');
+              // print('<p>endDate: '.$endDate.'</p>');
+              // print('<p>totalNight: '.$totalNight.'</p>');
 
               $roomtype_model = new roomtype_model();
 
-              $types=$roomtype_model->select();
+              $types=$roomtype_model->getType(2);
 
-              // print('<pre>');
-              // print_r($types);
-              // print('</pre>');
+              $countType = $this->model->countTypeWithDate(2,8,9);
+
+              print('countType');
+           
+              print('<pre>');
+              print_r($countType);
+              print('</pre>');
+
               // print('<p>bat dau foreach</p>');
               // foreach ($types as $key => $value) {
               //   # code...
