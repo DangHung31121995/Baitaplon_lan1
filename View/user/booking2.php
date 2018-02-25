@@ -104,8 +104,8 @@
 
 										
 										?>
-
-										<select class="form-control numType" id ="<?php print($id_select_type); ?>" name="<?php print($id_select_type); ?>"">
+										
+										<select class="form-control numType " name="<?php print($id_select_type); ?>" data-id="<?php echo $val->id; ?>" >
 
 										<?php
 
@@ -141,13 +141,31 @@
 </div>
 <script type="text/javascript">
 	$("#btnStep2").click(function(){
-		// var value = $('.numType option:selected ').val();
-		// alert(value);
+
+		var listIdTypes=$('.numType');
+		var idTypeCountTypes=[];
+		$.each(listIdTypes,function(i,item){
+			// console.log('i: ',i);
+			// console.log('\nitem: ',item);
+			idTypeCountTypes.push({
+				idType: $(item).data("id"),
+				soLuong: $(item).val()
+			})
+		});
+		console.log(idTypeCountTypes);
+
+
+		$.ajax({
+			url: "?controller=viewbooking&action=step3",
+			data: {idTypeCountTypeModel: JSON.stringify(idTypeCountTypes) },
+			dataType: 'JSON',
+			type: 'POST'
+
+
+		});
+		window.location.href = "?controller=viewbooking&action=step3";
 	});
-	$('.numType').change(function(){
-		var value =$('.numType option:selected ').val();
-		alert(val);
-	})
+	
 </script>>
 
 

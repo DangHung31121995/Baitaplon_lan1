@@ -68,13 +68,22 @@ class VIEWBOOKING_CONTROLLER{
 
               $types=$roomtype_model->getType(2);
 
+
+              $idTypes =array();
+              foreach ($types as $key => $value) {
+                # code...
+                $idTypes[]=$value->id;
+              }
+              // print_r($idTypes);
+
+
               $countType = $this->model->countTypeWithDate(2,8,9);
 
-              print('countType');
+              // print('countType');
            
-              print('<pre>');
-              print_r($countType);
-              print('</pre>');
+              // print('<pre>');
+              // print_r($types);
+              // print('</pre>');
 
               // print('<p>bat dau foreach</p>');
               // foreach ($types as $key => $value) {
@@ -89,8 +98,16 @@ class VIEWBOOKING_CONTROLLER{
 
               
               require_once("View/user/booking2.php");
+            }
           break;
-  		    }
+        case 'step3':
+          # code...
+          $post = isset($_POST['idTypeCountTypeModel'])?$_POST['idTypeCountTypeModel']:'';
+          print('pót: ' );
+          print(json_decode($post));
+          require_once("View/user/booking3.php");
+          break;
+		    
 	   }
   }
 }

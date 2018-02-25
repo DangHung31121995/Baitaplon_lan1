@@ -49,7 +49,7 @@
 <script>
 
 	$(document).ready(function(){
-
+	
 
 		$('select option:contains("Hà Nội")').prop('selected',true);
 		if($('select[name=select_city]').val() =='1'){
@@ -130,6 +130,10 @@
 	        });
 	        return false;
 	});
+
+
+
+
 });
 	
 
