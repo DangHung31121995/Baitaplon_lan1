@@ -18,6 +18,7 @@ class VIEWBOOKING_CONTROLLER{
           // foreach ($idroomidType as $key => $value) {
           //   # code...
 
+          //   if(in_array($value->roomType,$a) ){
           //     print("a ".$value->roomType);
           //   }
           // }
