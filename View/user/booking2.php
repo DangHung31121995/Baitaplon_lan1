@@ -9,8 +9,8 @@
 	<div class="container">
 		<div class=" row divbookroom">
 			<div class=".col-md-6 linenumber">
-				<a href='?controller=viewbooking&action=step1' class='num last span_step1_num last' >1</a>
-				<a href='?controller=viewbooking&action=step1' class='text last span_step1_text last' >thông tin đặt phòng</a>
+				<a href='?controller=viewbooking&action=step1' class='num last  ' >1</a>
+				<a href='?controller=viewbooking&action=step1' class='text last  ' >thông tin đặt phòng</a>
 				<span class="num span_step2_num active">2</span>
 				<span class="text span_step2_text active">chọn phòng</span>
 				<span class="num">3</span>
@@ -35,8 +35,8 @@
 				<tr>
 					<td >Thời gian</td>
 					<td  >
-						<p hidden id = "startDate"> <?php print($startDatetime); ?></p> 
-						<p hidden id = "endDate"> <?php print($endDatetime); ?></p> 
+						<p  id = "startDate"> <?php print($startDateTime); ?></p> 
+						<p  id = "endDate"> <?php print($endDateTime); ?></p> 
 						<?php
 						 	print($startDate.' - '.$endDate);
 						?>
@@ -91,12 +91,16 @@
 									# code...
 									$check =false;
 									$num=0;
+									$arrIdRoom='';
+
 									foreach ($countType as $key => $value) {
 										# code...
 										
 										if($value->roomType == $val->id){
 											$check=true;
 											$num=$value->num;
+											$arrIdRoom=implode(",",$value->arrIdRom);
+											print('arrIdRoom: '.$arrIdRoom);	
 										}
 									}
 
@@ -104,8 +108,8 @@
 
 										
 										?>
-										
-										<select class="form-control numType " name="<?php print($id_select_type); ?>" data-id="<?php echo $val->id; ?>" >
+										 <!-- data-id="<?php echo $val->id; ?> -->
+										<select class="form-control numType " name="<?php print($id_select_type); ?>" data-id="<?php echo $val->id; ?>" data-arr-id-room ='<?php echo $arrIdRoom; ?>' >
 
 										<?php
 
@@ -134,7 +138,7 @@
 				</tbody>
 			</table>
 
-			<a class="btn btn-primary" id="btnStep2" href="javascript:void(0);"  style="margin-left: 48%">step3</a>
+			<a class="btn btn-primary" " id="btnStep2" href="javascript:void(0);"  style="margin-left: 48%">step3</a>
 
 		</div>
 	</div>
@@ -144,26 +148,63 @@
 
 		var listIdTypes=$('.numType');
 		var idTypeCountTypes=[];
+		var check=false;
+	
 		$.each(listIdTypes,function(i,item){
 			// console.log('i: ',i);
 			// console.log('\nitem: ',item);
-			idTypeCountTypes.push({
-				idType: $(item).data("id"),
-				soLuong: $(item).val()
-			})
+			if ($(item).val() >0){
+				check=true;
+				idTypeCountTypes.push({
+					idType: $(item).data("id"),
+					soLuong: $(item).val(),
+					arrIdRoom: $(item).data("arr-id-room")
+				})
+			}
 		});
-		console.log(idTypeCountTypes);
+		if(check==false){
+			alert('Bạn Cần Chọn Phòng');
+           
+		}else{
+			// console.log(idTypeCountTypes[0].idType);
+
+			// console.log(JSON.stringify(idTypeCountTypes))	;
+			//[{"idType":1,"soLuong":"3"},{"idType":2,"soLuong":"1"}]
+			var idTypeCount = JSON.stringify(idTypeCountTypes);
 
 
-		$.ajax({
-			url: "?controller=viewbooking&action=step3",
-			data: {idTypeCountTypeModel: JSON.stringify(idTypeCountTypes) },
-			dataType: 'JSON',
-			type: 'POST'
+
+			var startDateTime = <?php print($startDateTime); ?>;
+			var endDateTime= <?php print($endDateTime); ?>;
+			var idHotel =<?php print($id_hotel); ?>;
+			var idCity = <?php print($id_city); ?>;
+			// console.log('start: ',startDateTime);
+
+			var data ={
+				idTypeCount: idTypeCount,
+				startDateTime: startDateTime,
+				endDateTime: endDateTime,
+				idHotel: idHotel,
+				idCity: idCity
+			};
+			// console.log(data);
 
 
-		});
-		window.location.href = "?controller=viewbooking&action=step3";
+			var form = document.createElement('form');
+		    document.body.appendChild(form);
+		    form.method = 'post';
+		    form.action = '?controller=viewbooking&action=step3';
+		    for (var name in data) {
+		        var input = document.createElement('input');
+		        input.type = 'hidden';
+		        input.name = name;
+		        input.value = data[name];
+		        form.appendChild(input);
+		    }
+
+		    form.submit();
+			
+		}
 	});
 	
 </script>>

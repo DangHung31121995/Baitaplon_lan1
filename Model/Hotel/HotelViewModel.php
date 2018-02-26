@@ -1,5 +1,5 @@
 <?php 
- require("Model/data.php");
+ require_once("Model/data_entity.php");
 class HOTEL_MODEL{
 	private $conn;
 

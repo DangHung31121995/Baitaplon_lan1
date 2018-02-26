@@ -5,6 +5,8 @@
     public function __construct(){
       $this->conn=mysqli_connect('localhost','root','')or die('khong the ket noi');
       mysqli_select_db($this->conn,'roombooking');
+       mysqli_set_charset($this->conn,"utf8");
+ 
     }
 
     public function getIdRoomIdType( $id_hotel,  $startDate, $endDate){
@@ -36,10 +38,16 @@
     	group BY r.roomType ";
 
 
+      $query_room =" SELECT r.id, r.roomType FROM  room as r 
+      where r.idHotel = $idHotel AND (r.id  NOT IN (SELECT DISTINCT r2.id FROM room as r2 JOIN bookdetail as bd on bd.idRoom = r2.id 
+      WHERE (($startDate <= bd.inDate AND $endDate >=bd.inDate) OR $startDate<=bd.outDate AND $startDate >= bd.inDate ) ))";
+
+
     	// idroom, id type
     	$result=mysqli_query($this->conn,$query);
+      $result_room=mysqli_query($this->conn,$query_room);
     	// print('result');
-    	// print_r($result);
+    	// print_r($result_room);
 
     	
     	$datas =array();
@@ -47,14 +55,33 @@
     	// if(empty($datas)){
     	// 	print("rong");
     	// }
+    
 
     	if(mysqli_num_rows($result)>0){
-    		foreach ($result as $key => $value) {
-    				$datas[] = new data_entity($value);
+    		foreach ($result as $key => $countAndType) {//countAndType Array ( [num] => 3 [roomType] => 1 );
+             $data = new data_entity($countAndType);
+     
+             $arrIdRoom =array();
+          foreach ($result_room as $key2 => $roomAndType) { //roomAndType Array ( [id] => 9 [roomType] => 1 );
+              if($roomAndType['roomType'] == $countAndType['roomType']){
+                array_push($arrIdRoom, $roomAndType['id']);
+              }
+
+            }
+          
+            $data->arrIdRom = $arrIdRoom;	
+            $datas[]=$data;
   			}
   		}
+      // print("<pre>");
+      // print_r($datas);
+      // print("</pre>");
 
   		return $datas;
+    }
+
+    public function selectRoomWithTypeAndDate($idType,$soLuong){
+
     }
 }
 

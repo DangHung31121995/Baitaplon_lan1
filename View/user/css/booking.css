@@ -65,3 +65,15 @@ a{
   smargin-top: 25px;
     margin-left: 18%;
 }
+
+tr.td_step3 {
+    text-align: justify;
+}
+
+.row.divbookroom {
+    margin-top: 20px;
+}
+
+.row.detailInformation {
+    margin-top: 60px;
+}

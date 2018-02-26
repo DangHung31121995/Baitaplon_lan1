@@ -6,6 +6,7 @@ class user_model{
 	public function __construct(){
 	  $this->conn=mysqli_connect('localhost','root','')or die('khong the ket noi');
 	  mysqli_select_db($this->conn,'roombooking');
+     mysqli_set_charset($this->conn,"utf8");
 	}
 
 	public function select(){

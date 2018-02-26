@@ -48,14 +48,17 @@ class VIEWACCOUNT_CONTROLLER{
 			                	echo "history.back(-1);</script>";
 			                	exit;
 			              	}
+
 		        			$insert->$value2=$_POST[$value2];
 		        		}
 		        		break;
 		        	}
 		        }
+		        // print_r($insert);
 		        $result=$this->model->check($insert);
 		        $insert->id='null';
 		        $insert->isAdmin=0;
+
 		        $result=$this->model->insert($insert);
 		        if($result)
 		        {

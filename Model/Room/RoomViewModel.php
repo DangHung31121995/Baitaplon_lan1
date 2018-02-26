@@ -1,5 +1,5 @@
 <?php 
- require("Model/data.php");
+ require_once("Model/data_entity.php");
 class ROOM_MODEL{
 	private $conn;
 
