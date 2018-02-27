@@ -80,9 +80,84 @@
   		return $datas;
     }
 
-    public function selectRoomWithTypeAndDate($idType,$soLuong){
+    public function insertBookingDetail(data_entity $insert_value){
+      $query=mysqli_query($this->conn,'select * from bookdetail');
+      $fields=array();
+      $values_insert=array();
+      $data=mysqli_fetch_fields($query);
+      foreach($data as $key=>$value)
+      {
+        foreach($value as $key=>$value)
+        {
+          if($value=='id'){
+            // print("idddđ");
+            $fields[]=$value;
+            $values_insert[]="'NULL'";
+          }else{
+            $fields[]=$value;
+            $values_insert[]="'{$insert_value->$value}'";
+          }
+          break;
+        }
+      }
+      $fields=implode(',',$fields);
+      $values_insert=implode(',',$values_insert);
+      // print('fields: '.$fields);
+      // print('values_insert: '.$values_insert);
+      $query="insert into bookdetail ($fields) value ($values_insert)";
 
+      // print("signup_model: insert : mysql: ".$query);
+      $result=mysqli_query($this->conn,$query);
+      // print('result: '.$result);
+      if($result){
+        // print('id booking detail vưa insert : '.mysqli_insert_id($this->conn));
+        return mysqli_insert_id($this->conn);
+      }else{
+        print("booking_model: insert lỗi");
+        return 'booking_model insertBookingDetail: error';
+      }
     }
+
+   public function insertHistory(data_entity $insert_value){
+    $query=mysqli_query($this->conn,'select * from historybooking');
+      $fields=array();
+      $values_insert=array();
+      $data=mysqli_fetch_fields($query);
+      foreach($data as $key=>$value)
+      {
+        foreach($value as $key=>$value)
+        {
+          if($value=='id'){
+            // print("idddđ");
+            $fields[]=$value;
+            $values_insert[]="'NULL'";
+          }else{
+            $fields[]=$value;
+            $values_insert[]="'{$insert_value->$value}'";
+          }
+          break;
+        }
+      }
+      $fields=implode(',',$fields);
+      $values_insert=implode(',',$values_insert);
+      // print('fields: '.$fields);
+      // print('values_insert: '.$values_insert);
+      $query="insert into historybooking ($fields) value ($values_insert)";
+
+      // print("signup_model: insert : mysql: ".$query);
+      $result=mysqli_query($this->conn,$query);
+      // print('result: '.$result);
+      if($result){
+        // print('id booking detail vưa insert : '.mysqli_insert_id($this->conn));
+        return mysqli_insert_id($this->conn);
+      }else{
+        print("booking_model:insertHistory insert lỗi");
+        return 'booking_model insertHistory: error';
+      }
+
+   }
+
+
 }
 
 ?>

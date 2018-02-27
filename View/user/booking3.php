@@ -21,7 +21,7 @@
 
 
 		<div class="row detailInformation">
-			<table class="table col-md-12">
+			<table class="table col-md-12 " id='table_detail'>
 				<thead class="thead-light">
 					<tr class="td_step3">
 						<th width="10%">Khách Sạn</th>
@@ -41,14 +41,18 @@
 						for($i =0; $i<$value['soLuong']; $i++){
 							$roomDetail = $room->GetDetailRoom($arrIdRoom[$i]);
 							$roomType = $type->GetDetailTypeRoom($roomDetail->roomType);
+							$price =$roomType->pricePerDay*($endDateTime-$startDateTime)/$timeADay;
 							// print_r($roomType);
 						?>
 						
 						<tr class="td_step3">
+							<td style="display:none;" class="value" data-id-room="<?php echo $roomDetail->id; ?>" data-start-date="<?php echo $startDateTime; ?>"  data-end-date="<?php echo $endDateTime; ?>" data-price="<?php echo $price; ?>">
+								
+							</td>
 							<td>
 								<?php echo $hotelDetail->name; ?>
 							</td>
-							<td>
+							<td >
 								<?php echo $hotelDetail->address; ?>
 							</td>
 							<td>
@@ -61,15 +65,16 @@
 									echo $roomType->typeName;;
 								?>
 							</td>
-							<td>
+							<td >
 								<?php echo $startDate; ?>
 							</td>
-							<td>
+							<td >
 								<?php echo $endDate; ?>
 							</td>
 							<td >
-								<?php echo $roomType->pricePerDay*($endDateTime-$startDateTime)/$timeADay; ?>
+								<?php echo $price ?>
 							</td>
+							
 
 						</tr>
 
@@ -128,33 +133,42 @@
 
 	});
 	$("#btnXanNhan").click(function(){
+
+
+
+		var listIdTypes=$('.value');
+		var datas=[];
+		var check=false;
+		$.each(listIdTypes,function(i,item){
+			// console.log('i: ',i);
+			// console.log('\nitem: ',item);
+			
+			datas.push({
+				idRoom: $(item).data("id-room"),
+				inDate: $(item).data("start-date"),
+				outDate: $(item).data("end-date"),
+				price: $(item).data("price")
+			});
+		
+		});
+	
+
+		var data = JSON.stringify(datas);
+		console.log(data);
 		var form = document.createElement('form');
 		    document.body.appendChild(form);
 		    form.method = 'post';
 		    form.action = '?controller=viewbooking&action=step4';
-		   
-	        var input1 = document.createElement('input');
-	        input1.type = 'hidden';
-	        input1.name="id_room";
-	        input1.value = <?php echo $roomDetail->id;?>;
-	        form.appendChild(input1);
+		  
+	        var input = document.createElement('input');
+	        input.type = 'hidden';
+	        input.name = 'insert';
+	        input.value =data;
+	        form.appendChild(input);
+		 
 
-	        var input2 = document.createElement('input');
-	        input2.type = 'hidden';
-	        input2.name="start_date";
-	        input2.value = <?php echo $startDateTime;?>;
-	        console.log('abc');
-	        console.log(input2.value);
-	        form.appendChild(input2);
+		    form.submit();
 
-	        var input3 = document.createElement('input');
-	        input3.type = 'hidden';
-	        input3.name="end_date";
-	        input3.value = <?php echo $endDateTime; ?>;
-	        form.appendChild(input3);
-
-
-		form.submit();
 	});
 
 

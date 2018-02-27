@@ -41,7 +41,9 @@
 		if (session_status() == PHP_SESSION_NONE) {
 		    session_start();
 		}
-		
+		if(isset($_SESSION['forgot'])){
+			unset($_SESSION['forgot']);
+		}
 		if(!isset($_SESSION['user'])){?>
 		<div class="col-md-7" id="div_form_signin">
 			<form class="form-row col-md-12" style="margin-top: 40px;" id="form_signin" method="post" >
@@ -70,6 +72,20 @@
 		</div>
 
 		<?php
+	}elseif(isset($_SESSION['isAdmin'])){ ?>
+			<div class="col-md-7 " >
+
+				<div class="accountuser" id="myaccount" style="float: right;margin-top: 30px;">
+					<p style="text-align: center;">Hi <strong><?php echo $_SESSION['user']; ?> </strong></p>
+					<a href="?controller=viewaccount&action=myaccount">My Account</a>
+					|
+					<a href="?controller=viewaccount&action=signout">Sign Out</a>
+					<p style="margin-top:15px;"><a href="?controller=admin&action=index.php">Truy Cập Quản Trị</a></p>
+
+				</div>
+				
+			</div>
+	<?php
 	}else{ ?>
 		<div class="col-md-7 " >
 
@@ -78,6 +94,7 @@
 				<a href="?controller=viewaccount&action=myaccount">My Account</a>
 				|
 				<a href="?controller=viewaccount&action=signout">Sign Out</a>
+				
 
 			</div>
 			

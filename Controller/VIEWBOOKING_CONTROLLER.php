@@ -148,10 +148,10 @@ class VIEWBOOKING_CONTROLLER{
           $endDate = date('m/d/Y',$endDateTime);
           $timeADay=60*60*24;
           $abc = $startDate.' - '.$endDate; 
-          print('abc: '.$abc);
+          // print('abc: '.$abc);
           $date = explode(' - ',$abc);
-          print('---1: '.$date[0]);
-          print('---2:'.$date[1]);
+          // print('---1: '.$date[0]);
+          // print('---2:'.$date[1]);
 
           
           require_once("View/user/booking3.php");
@@ -159,21 +159,39 @@ class VIEWBOOKING_CONTROLLER{
         break;//endstep3
 
         case 'step4':
-            $startDateTime = $_POST['start_date'];
-            $endDateTime = $_POST['end_date'];
+            $insert = $_POST['insert'];
+            // print($insert);
+            $insert=json_decode($insert,true);
+            // print_r($insert[0]); //Array ( [idRoom] => 9 [inDate] => 1519686000 [outDate] => 1519858800 [price] => 200000 )
 
-            $idRoom = $_POST['id_room'];
-            if(session_start()==PHP_SESSION_NONE){
-              session_start();
-            };
-            $nameUser=$_SESSION['user'];
+            // print($insert[0]->idRoom);
             require_once("Model/user_model.php");
-            $user= new user_model();
-            $idUser=$user->getIdUser($nameUser);
+            $user_model= new user_model();
+            $nameUser=$_SESSION['user'];
+            $user=$user_model->getUser($nameUser);
+            $time=time();
 
-            print('startDateTime; '.$startDateTime);
-            print('endDateTime; '.$endDateTime);
-            print('idRoom; '.$idRoom);
+
+            // print($time);
+            // print("----: ".date('m/d/Y',$time));
+
+            foreach ($insert as $key => $value) { //$value ở đây là $insert[0], ($insert[0] là mảng)
+              # code...
+              $insert_bookingdetail = new data_entity($value);
+              $id_row= $this->model->insertBookingDetail($insert_bookingdetail);
+              if(is_numeric($id_row)){
+                $time=time();
+                $i =array();
+                $insert_history = new data_entity($i);
+                $insert_history->idCustomer = $user->id;
+                $insert_history->idBookingDetail= $id_row;
+                $insert_history->dateOfBooking=$time;
+
+                $this->model->insertHistory($insert_history);
+
+              }
+              
+            }
 
 
 

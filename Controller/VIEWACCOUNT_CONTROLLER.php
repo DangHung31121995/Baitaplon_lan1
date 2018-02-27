@@ -94,16 +94,29 @@ class VIEWACCOUNT_CONTROLLER{
 
 					if($result)
 					{
-						$array = array(
-							'check'=>true,
-							'user'=>$user->username,
-							'mess'=>'ok'
-						);
 						if (session_status() == PHP_SESSION_NONE) {
 			      	  		session_start();
 			    		}
-						$_SESSION['user']=$user->username;
-						print json_encode($array);
+						if(isset($_SESSION['isAdmin'])){
+							$array = array(
+								'check'=>true,
+								'user'=>$user->username,
+								'mess'=>'ok',
+								'isAdmin'=>1
+							);
+						
+							print json_encode($array);
+						}else{
+							$array = array(
+								'check'=>true,
+								'user'=>$user->username,
+								'mess'=>'ok',
+								'isAdmin'=>0
+							);
+						
+							print json_encode($array);
+						}
+						
 
 					}else{
 						$array = array(
@@ -175,7 +188,7 @@ class VIEWACCOUNT_CONTROLLER{
 			        $check =  $this->model->updatePass($username,$pass);
 			        // print(gettype($check));
 			        if($check){
-
+			        	unset($_SESSION['forgot']);
 			        	print("check true");
 			        	echo "<script>alert('Cật Nhật Thành Công');";
 			        	echo"window.location.href = '?controller=trangchu'</script>";

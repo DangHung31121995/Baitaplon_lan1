@@ -114,6 +114,7 @@
                     alert(myData.mess);
                 }else {
 					
+
                 	
 
                 	var html =
@@ -124,9 +125,12 @@
 					html = html +'</strong></p>'+
 						'<a href="?controller=viewaccount&action=myaccount">My Account</a>'+
 						' | '
-						+'<a href="?controller=viewaccount&action=signout">Sign Out</a>'+
+						+'<a href="?controller=viewaccount&action=signout">Sign Out</a>';
+					if(myData.isAdmin==1){
+						html = html +'<p style="margin-top:15px;"><a href="?controller=admin&action=index.php">Truy Cập Quản Trị</a></p>';
+					}
 				
-					'</div>';
+					html = html +'</div>';
                  
                    $('#div_form_signin').html(html);
 
