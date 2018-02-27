@@ -108,15 +108,20 @@
 	        success :  function(myData)
 	        {          
   				console.log(myData);
-  				console.log(myData.check);
+  				// console.log(myData.check);
                 if(myData.check == false)
                 {
                     alert(myData.mess);
                 }else {
+					
+                	
+
                 	var html =
                 	
 					'<div class="accountuser" id="myaccount" style="float: right;margin-top: 30px;">'+
-						'<p style="text-align: center;">Hi <strong>'+'</strong></p>'+
+						'<p style="text-align: center;">Hi <strong>';
+					html= html+ String(myData.user);
+					html = html +'</strong></p>'+
 						'<a href="?controller=viewaccount&action=myaccount">My Account</a>'+
 						' | '
 						+'<a href="?controller=viewaccount&action=signout">Sign Out</a>'+

@@ -52,6 +52,9 @@ class VIEWBOOKING_CONTROLLER{
             // luu gia tri start datetime vao database
             $startDateTime = strtotime($startDate);
 
+            // $startDateSTRING = date('m/d/Y',$startDateTime);
+            // $endDateSTRING = date('m/d/Y',$endDateTime);
+
             // $newformat = date('m/d/Y',$startDateTime);
 
             
@@ -160,12 +163,19 @@ class VIEWBOOKING_CONTROLLER{
             $endDateTime = $_POST['end_date'];
 
             $idRoom = $_POST['id_room'];
-            session_start();
-            $idUser=$_SESSION['user'];
+            if(session_start()==PHP_SESSION_NONE){
+              session_start();
+            };
+            $nameUser=$_SESSION['user'];
+            require_once("Model/user_model.php");
+            $user= new user_model();
+            $idUser=$user->getIdUser($nameUser);
 
             print('startDateTime; '.$startDateTime);
             print('endDateTime; '.$endDateTime);
             print('idRoom; '.$idRoom);
+
+
 
 
             require_once("View/user/booking4.php");

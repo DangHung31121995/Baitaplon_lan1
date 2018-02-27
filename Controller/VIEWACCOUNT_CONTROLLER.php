@@ -1,9 +1,9 @@
 <?php 
-require_once('Model/signup_model.php');
+require_once('Model/user_model.php');
 class VIEWACCOUNT_CONTROLLER{
 	var $model;
     public function __construct(){
-      $this->model=new signup_model();
+      $this->model=new user_model();
     }
 
 	public function run(){
@@ -55,15 +55,16 @@ class VIEWACCOUNT_CONTROLLER{
 		        	}
 		        }
 		        // print_r($insert);
-		        $result=$this->model->check($insert);
-		        $insert->id='null';
-		        $insert->isAdmin=0;
-
+		        $result=$this->model->check($insert); // check dieu kien du hay chua
+		       	$user->isAdmin=0;
 		        $result=$this->model->insert($insert);
 		        if($result)
 		        {
 		        	// print("account_controller: sigup : result : ".$result);
 		        	// print('dang ky thanh cong');
+		        	if (session_status() == PHP_SESSION_NONE) {
+					    session_start();
+					}
 		        	$_SESSION['user']=$insert->username;
 		        	echo "<script>alert('Đăng ký thành công');";
 		         	echo "window.location.href='?controller=trangchu';</script>";
@@ -77,19 +78,31 @@ class VIEWACCOUNT_CONTROLLER{
 			case 'signin':
 				if(!empty($_POST['user']))
 				{
-					$username = trim($_POST['user']);
-					$password = trim($_POST['password']);
+					$u=array();
+					$user=new data_entity($u);
+					$user->username=trim($_POST['user']);
+					$user->password=trim($_POST['password']);
+					if(!$user->username||!$user->password)
+					{
+						echo "<script> alert('Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu');";
+						echo "history.back(-1);</script>";
+					exit;
+					}
+					$result=$this->model->checkSignIn($user);
+					
 	   				 //neu dang nhap dung
 
-					if($username == 'a' && $password == 'b')
+					if($result)
 					{
 						$array = array(
 							'check'=>true,
-							'user'=>$username,
+							'user'=>$user->username,
 							'mess'=>'ok'
 						);
-						session_start();
-						$_SESSION['user']=$username;
+						if (session_status() == PHP_SESSION_NONE) {
+			      	  		session_start();
+			    		}
+						$_SESSION['user']=$user->username;
 						print json_encode($array);
 
 					}else{
@@ -102,15 +115,78 @@ class VIEWACCOUNT_CONTROLLER{
 				}
 				break;
 			case 'signout':
-				session_start();
+				if (session_status() == PHP_SESSION_NONE) {
+			        session_start();
+			    }
 				unset($_SESSION['user']);
+				if(isset($_SESSION['isAdmin'])){
+					unset($_SESSION['isAdmin']);
+				}
           		header('Location: ?controller=trangchu');
 				break;
 			case 'myaccount':
 				require_once("View/user/myaccount.php");
 				# code...
 				break;
+			case 'forgot':
 
+				$action_POST = isset($_POST['action_forgot'])?$_POST['action_forgot']:'';
+		        if (empty($action_POST)) {
+		          require_once("View/user/forgot.php");
+		          break;
+		        }
+		        $username=$_POST['username'];
+		        $email = $_POST['email'];
+		        $cmtnd= $_POST['cmtnd'];
+		        // print($username."---".$email."---".$cmtnd);
+
+		        
+		        $check =  $this->model->checkForgot($username,$email,$cmtnd);
+
+		        if($check){
+		        	if (session_status() == PHP_SESSION_NONE) {
+					    session_start();
+					}
+					$_SESSION['forgot']=$username;
+		        	header('Location: ?controller=viewaccount&action=passcreated');
+		        }
+
+				break;
+			case 'passcreated':
+				if (session_status() == PHP_SESSION_NONE) {
+					    session_start();
+					}
+				if(!isset($_SESSION['forgot'])){
+					echo "<script>alert('Bạn Không được quyền truy cập thay đổi mật khẩu');</script>";
+		        	echo "<script>history.back(-1);</script>";
+				}
+				$action_POST = isset($_POST['action_passcreated'])?$_POST['action_passcreated']:'';
+		        if (empty($action_POST)) {
+		          require_once("View/user/passcreated.php");
+		          break;
+		        }
+		        $pass=$_POST['password_new'];
+		        $pass_2 = $_POST['password_new_2'];
+		        if(strcmp($pass,$pass_2)!=0){
+		        	echo "<script>alert('Mật Khẩu Không trùng khớp');</script>";
+		        	echo "<script>history.back(-1);</script>";
+		        }else{
+			        $username=$_SESSION['forgot'];
+			        $check =  $this->model->updatePass($username,$pass);
+			        // print(gettype($check));
+			        if($check){
+
+			        	print("check true");
+			        	echo "<script>alert('Cật Nhật Thành Công');";
+			        	echo"window.location.href = '?controller=trangchu'</script>";
+			        }else{
+			        	echo "<script>alert('Cật Nhật Lỗi');</script>";
+			        	echo "<script>history.back(-1);</script>";
+			        	// print("check false;");
+			        }
+					
+				}
+			break;
 			default:
 				# code...
 				break;
