@@ -58,7 +58,7 @@ class user_model{
     [isAdmin] => 0*/
         // print('pass: '.$row->password."-----".$user->password);
         if($row->password == $user->password){
-          if (session_status() == PHP_SESSION_NONE) {
+          if (!isset($_SESSION)) {
               session_start();
            }
           $_SESSION['user']=$user->username;
@@ -78,7 +78,7 @@ class user_model{
     }
 
   public function getUser($name){
-      $query="SELECT user.id FROM user WHERE user.username='{$name}' ";
+      $query="SELECT * FROM user WHERE user.username='{$name}' ";
       $result=mysqli_query($this->conn,$query);
       if(mysqli_num_rows($result)>0){
         $row  = mysqli_fetch_array($result);

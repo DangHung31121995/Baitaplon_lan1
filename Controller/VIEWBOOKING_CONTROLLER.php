@@ -12,7 +12,7 @@ class VIEWBOOKING_CONTROLLER{
     $action = isset($_GET['action'])?$_GET['action']:'';
 
   		// print('booking_con_run:'.	$action);
-    if (session_status() == PHP_SESSION_NONE) {
+    if (!isset($_SESSION)) {
         session_start();
     }
     if(!isset($_SESSION['user'])){
@@ -32,7 +32,10 @@ class VIEWBOOKING_CONTROLLER{
 
            if(empty($action_POST)){
                     // print('action null: '.$action_POST);
-            print('Lỗi tại booking controller Step2');
+            if(empty($idTypeCount)){
+             print("<script>alert('Bạn phải chọn khách sạn để đặt phòng!!'); history.back(-1);</script>");
+
+        }
 
           }else{
                     // print("action # null: ".$action_POST);
@@ -86,7 +89,8 @@ class VIEWBOOKING_CONTROLLER{
             // print_r($idTypes);
 
 
-            $countType = $this->model->countTypeWithDate(2,8,9);
+            //test 2,8,9  
+            $countType = $this->model->countTypeWithDate($id_hotel,$startDateTime,$endDateTime);
 
             // print('countType');
 
@@ -113,7 +117,12 @@ class VIEWBOOKING_CONTROLLER{
         # code...
         $idTypeCount = isset($_POST['idTypeCount'])?$_POST['idTypeCount']:'';
 
-        if(!empty($idTypeCount)){
+        if(empty($idTypeCount)){
+             print("<script>alert('Bạn không thể truy cập lúc này!!'); history.back(-1);</script>");
+
+        }
+
+        else{
           $startDateTime= $_POST['startDateTime'];
           $endDateTime= $_POST['endDateTime'];
           $idHotel= $_POST['idHotel'];
@@ -159,7 +168,11 @@ class VIEWBOOKING_CONTROLLER{
         break;//endstep3
 
         case 'step4':
-            $insert = $_POST['insert'];
+            $insert = isset($_POST['insert'])? $_POST['insert']:'';
+            if(empty($insert)){
+                 print("<script>alert('Bạn không thể truy cập lúc này!!'); history.back(-1);</script>");
+
+            }
             // print($insert);
             $insert=json_decode($insert,true);
             // print_r($insert[0]); //Array ( [idRoom] => 9 [inDate] => 1519686000 [outDate] => 1519858800 [price] => 200000 )
@@ -192,14 +205,38 @@ class VIEWBOOKING_CONTROLLER{
               }
               
             }
-
-
-
-
             require_once("View/user/booking4.php");
         break;
-        }
-      }
+
+        case 'delhistory':
+
+            $idhis = isset($_POST['id'])?$_POST['id']:'';
+            
+            if(empty($idhis)){
+              // print("history emtpy");
+              $myData = array('check'=>false,'mess'=>"khong tim thay id");
+               print json_encode($myData);
+            }else{
+              require_once('Model/history_model.php');
+
+              $modelHis = new history_model();
+              $result = $modelHis->delHistory($idhis);
+              if($result){
+                $myData = array('check'=>true, 'mess'=> 'ok');
+                print json_encode($myData); 
+              }else{
+                $myData = array('check'=>true, 'mess'=> 'del history error');
+                print json_encode($myData); 
+              }
+              
+            }
+            # code...
+           
+          break;
+  
+     }
     }
+  }
+
 
 ?>
