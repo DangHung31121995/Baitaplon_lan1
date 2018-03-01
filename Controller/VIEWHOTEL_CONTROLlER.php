@@ -10,7 +10,7 @@ class VIEWHOTEL_CONTROLlER{
 		require_once('Model/City/CityViewModel.php');
 		$city = new CITY_MODEL();
 
- 		$hotels=$this->model->GETALLHOTEL();
+ 		$countHotel=$this->model->countHotelWithCity();
  	
 
  		require_once('View/user/hotels.php');
