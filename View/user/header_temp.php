@@ -38,7 +38,7 @@
 		</div>
 
 		<?php
-		if (!isset($_SESSION)) {
+		if (session_status() == PHP_SESSION_NONE) {
 		    session_start();
 		}
 		if(isset($_SESSION['forgot'])){
@@ -75,9 +75,9 @@
 	}elseif(isset($_SESSION['isAdmin'])){ ?>
 			<div class="col-md-7 " >
 
-				<div class="accountuser" id="tttk" style="float: right;margin-top: 30px;">
+				<div class="accountuser" id="myaccount" style="float: right;margin-top: 30px;">
 					<p style="text-align: center;">Hi <strong><?php echo $_SESSION['user']; ?> </strong></p>
-					<a href="?controller=viewaccount&action=tttk">My Account</a>
+					<a href="?controller=viewaccount&action=myaccount">My Account</a>
 					|
 					<a href="?controller=viewaccount&action=signout">Sign Out</a>
 					<p style="margin-top:15px;"><a href="?controller=admin&action=index.php">Truy Cập Quản Trị</a></p>
@@ -89,9 +89,9 @@
 	}else{ ?>
 		<div class="col-md-7 " >
 
-			<div class="accountuser" id="tttk" style="float: right;margin-top: 30px;">
+			<div class="accountuser" id="myaccount" style="float: right;margin-top: 30px;">
 				<p style="text-align: center;">Hi <strong><?php echo $_SESSION['user']; ?> </strong></p>
-				<a href="?controller=viewaccount&action=tttk">My Account</a>
+				<a href="?controller=viewaccount&action=myaccount">My Account</a>
 				|
 				<a href="?controller=viewaccount&action=signout">Sign Out</a>
 				

@@ -6,13 +6,13 @@
 			<div class="col-md-7">
 				<div class="row">
 					<div class="col-md-4">
-						<a class="typehotel" href="?controller=viewhotel&action=hanoi"  >CURTISS HÀ NỘI </a>
+						<a class="typehotel" href="?controller=viewhotel&action=luxury"  >CURTISS LUXURY </a>
 					</div>
 					<div class="col-md-4">
-						<a class="typehotel" href="?controller=viewhotel&action=danang"  >CURTISS ĐÀ NẴNG </a>
+						<a class="typehotel" href="?controller=viewhotel&action=grand"  >CURTISS GRAND </a>
 					</div>
 					<div class="col-md-4">
-						<a class="typehotel" href="?controller=viewhotel&action=saigon">CURTISS SÀI GÒN </a>
+						<a class="typehotel" href="?controller=viewhotel&action=holiday">CURTISS HOLIDAY </a>
 					</div>
 				</div>
 
@@ -119,11 +119,11 @@
 
                 	var html =
                 	
-					'<div class="accountuser" id="tttk" style="float: right;margin-top: 30px;">'+
+					'<div class="accountuser" id="myaccount" style="float: right;margin-top: 30px;">'+
 						'<p style="text-align: center;">Hi <strong>';
 					html= html+ String(myData.user);
 					html = html +'</strong></p>'+
-						'<a href="?controller=viewaccount&action=tttk">My Account</a>'+
+						'<a href="?controller=viewaccount&action=myaccount">My Account</a>'+
 						' | '
 						+'<a href="?controller=viewaccount&action=signout">Sign Out</a>';
 					if(myData.isAdmin==1){

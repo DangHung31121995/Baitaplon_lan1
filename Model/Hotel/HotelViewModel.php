@@ -160,45 +160,5 @@ class HOTEL_MODEL{
 			  die('loi la '. mysqli_error($this->conn));
 		}
 	 }
-	 public function getHotelWithCity($idCity){
-	 	$sql='SELECT * FROM hotel where idCity=$idCity ';
-	    $result = mysqli_query($this->conn,$sql) or die(mysqli_error($this->conn));
-		if($result)
-		{
-          $array=array();
-		  $i=0;
-		  while($row = mysqli_fetch_array($result))
-			{
-				$hotel_object = new data_entity($row);
-				$array[]=$hotel_object;
-			}
-
-			return  $array;
-
-		}
-		else
-		{
-			  die('loi la '. mysqli_error($this->conn));
-		}
-
-	 }
-	 public function countHotelWithCity($idCity){
-	 	$sql='SELECT COUNT(hotel.id) FROM `hotel` WHERE hotel.idCity=$idCity';
-	    $result = mysqli_query($this->conn,$sql) or die(mysqli_error($this->conn));
-		if($result)
-		{
-        	$array=array();
-		  	
-        	$row = mysqli_fetch_array($return);
-        	$array[] =$row;
-			return  $array;
-
-		}
-		else
-		{
-			  die('loi la '. mysqli_error($this->conn));
-		}
-
-	 }
 }
 ?>

@@ -7,8 +7,6 @@ class VIEWACCOUNT_CONTROLLER{
     }
 
 	public function run(){
-
-
 		$action = isset($_GET['action'])?$_GET['action']:'';
 		switch ($action) {
 			case 'signup':
@@ -57,23 +55,6 @@ class VIEWACCOUNT_CONTROLLER{
 		        	}
 		        }
 		        // print_r($insert);
-		        //check so 
-		        $pattern = '/^[0-9]+$/';
-		        if(preg_match($pattern,$insert->phoneNumber)){
-		        	echo "<script>alert('Điện Thoại Phải Là Chữ Số');";
-			           //      	print("value2: ");
-	        					// print($value2);
-                	echo "history.back(-1);</script>";
-                	exit;
-		        }
-		        if(preg_match($pattern,$insert->cmtnd)){
-		        	echo "<script>alert('Số Chứng Minh Thư Phải Là Chữ Số');";
-			           //      	print("value2: ");
-	        					// print($value2);
-                	echo "history.back(-1);</script>";
-                	exit;
-		        }
-
 		        $result=$this->model->check($insert); // check dieu kien du hay chua
 		       	$user->isAdmin=0;
 		        $result=$this->model->insert($insert);
@@ -81,7 +62,7 @@ class VIEWACCOUNT_CONTROLLER{
 		        {
 		        	// print("account_controller: sigup : result : ".$result);
 		        	// print('dang ky thanh cong');
-		        	if (!isset($_SESSION)) {
+		        	if (session_status() == PHP_SESSION_NONE) {
 					    session_start();
 					}
 		        	$_SESSION['user']=$insert->username;
@@ -113,7 +94,7 @@ class VIEWACCOUNT_CONTROLLER{
 
 					if($result)
 					{
-						if (!isset($_SESSION)) {
+						if (session_status() == PHP_SESSION_NONE) {
 			      	  		session_start();
 			    		}
 						if(isset($_SESSION['isAdmin'])){
@@ -147,7 +128,7 @@ class VIEWACCOUNT_CONTROLLER{
 				}
 				break;
 			case 'signout':
-				if (!isset($_SESSION)) {
+				if (session_status() == PHP_SESSION_NONE) {
 			        session_start();
 			    }
 				unset($_SESSION['user']);
@@ -156,7 +137,10 @@ class VIEWACCOUNT_CONTROLLER{
 				}
           		header('Location: ?controller=trangchu');
 				break;
-			
+			case 'myaccount':
+				require_once("View/user/myaccount.php");
+				# code...
+				break;
 			case 'forgot':
 
 				$action_POST = isset($_POST['action_forgot'])?$_POST['action_forgot']:'';
@@ -173,7 +157,7 @@ class VIEWACCOUNT_CONTROLLER{
 		        $check =  $this->model->checkForgot($username,$email,$cmtnd);
 
 		        if($check){
-		        	if (!isset($_SESSION)) {
+		        	if (session_status() == PHP_SESSION_NONE) {
 					    session_start();
 					}
 					$_SESSION['forgot']=$username;
@@ -182,7 +166,7 @@ class VIEWACCOUNT_CONTROLLER{
 
 				break;
 			case 'passcreated':
-				if (!isset($_SESSION)) {
+				if (session_status() == PHP_SESSION_NONE) {
 					    session_start();
 					}
 				if(!isset($_SESSION['forgot'])){
@@ -196,7 +180,7 @@ class VIEWACCOUNT_CONTROLLER{
 		        }
 		        $pass=$_POST['password_new'];
 		        $pass_2 = $_POST['password_new_2'];
-		        if(strcmp($pass,$pass_2)!=0 and !empty($pass)){
+		        if(strcmp($pass,$pass_2)!=0){
 		        	echo "<script>alert('Mật Khẩu Không trùng khớp');</script>";
 		        	echo "<script>history.back(-1);</script>";
 		        }else{
@@ -205,7 +189,7 @@ class VIEWACCOUNT_CONTROLLER{
 			        // print(gettype($check));
 			        if($check){
 			        	unset($_SESSION['forgot']);
-			        	// print("check true");
+			        	print("check true");
 			        	echo "<script>alert('Cật Nhật Thành Công');";
 			        	echo"window.location.href = '?controller=trangchu'</script>";
 			        }else{
@@ -216,115 +200,6 @@ class VIEWACCOUNT_CONTROLLER{
 					
 				}
 			break;
-
-			case 'tttk':
-				if(!isset($_SESSION)){
-					session_start();
-				}
-				if(empty($_SESSION['user'])){
-					print("<script>Bạn cần đăng nhập để sử dụng chức năng này; history.back(-1);</script>");
-					exit;
-				};
-				$username = $_SESSION['user'];
-
-				$data = $this->model->getUser($username);
-				// print($data->id);
-				$action_POST = isset($_POST['action'])?$_POST['action']:'';
-		        if (empty($action_POST)) {
-		          require_once("View/user/thongtintaikhoan.php");
-		          break;
-		        }
-		        foreach($data as $key=>$value)
-		        {
-		          foreach($value as $k=>$value)
-		          {
-		            if(isset($_POST["{$k}"]))
-		            {
-		                $data->$k=$_POST["{$k}"];
-		            }
-		          }
-		          break;
-		        }
-		        $result=$this->model->update($data,$data->id);
-		        header('location:index.php?controller=myaccount');
-
-				
-				# code...
-			break;
-			case 'changepass':
-				if(!isset($_SESSION)){
-					session_start();
-				}
-				if(empty($_SESSION['user'])){
-					print("<script>Bạn cần đăng nhập để sử dụng chức năng này; history.back(-1);</script>");
-					exit;
-				};
-				# code...
-				$username = $_SESSION['user'];
-				$action_POST = isset($_POST['action_pass'])?$_POST['action_pass']:'';
-		        if (empty($action_POST)) {
-		           require_once("View/user/changepass.php");
-		          break;
-		        }
-
-				$pass=$_POST['password_new'];
-		        $pass_2 = $_POST['password_new_2'];
-		        if(strcmp($pass,$pass_2)!=0 and !empty($pass)){
-		        	echo "<script>alert('Mật Khẩu Không trùng khớp');</script>";
-		        	break;
-		        }else{
-			        $check =  $this->model->updatePass($username,$pass);
-			        // print(gettype($check));
-			        if($check){
-		
-			        	// print("check true");
-			        	echo "<script>alert('Cật Nhật Thành Công');";
-			        	echo"window.location.href = '?controller=trangchu'</script>";
-			        }else{
-			        	echo "<script>alert('Cật Nhật Lỗi');</script>";
-			        	echo "<script>history.back(-1);</script>";
-			        	// print("check false;");
-			        }
-					
-				}
-
-
-				break;
-			case 'history':
-				# code...
-				require_once('Model/history_model.php');
-				$history=new history_model();
-
-				$idHisotry = isset($_GET['id'])?$_GET['id']:'';
-				// print("id: ".$idHisotry);
-				if(!empty($idHisotry)){
-
-					$info = $history->getInformation($idHisotry);
-					// print_r($info);
-					require_once("View/user/historyInfo.php");
-				}else{
-
-					if(!isset($_SESSION)){
-						session_start();
-					}
-
-					$username= $_SESSION['user'];
-					// print($username);
-					
-					$idUser = $this->model->getUser($username);
-
-				
-					$historybooking = $history->getWithUser(12); // $idUser =12;
-					if(empty($historybooking)){
-						print("<script>alert(Không tồn tại dữ liệu cho user này!); history.back(-1);</script>");
-					}else{
-						require_once("View/user/history.php");
-
-					}
-				}//end elsse
-
-				
-				break;
 			default:
 				# code...
 				break;
