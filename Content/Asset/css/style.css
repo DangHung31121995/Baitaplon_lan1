@@ -1,0 +1,96 @@
+/* CSS Document */
+*{
+	padding: 0px;
+	margin: 0px;
+	border: 0px;	
+	font-family: Arial, Helvetica, sans-serif;
+
+}
+
+body{
+	background: url(../images/body-bg7.png) left top repeat;		
+}
+
+.clr{
+	clear: both;	
+}
+
+a{
+	color: #06F;
+	text-decoration: none;
+}
+
+#wrapper{
+	width: 1000px;
+	margin: 0px auto;
+	padding: 0px;
+		
+}
+
+#header{
+	height: 149px;
+	line-height: 149px;
+	background: url(../images/bag_bane.png) left top no-repeat #2A75AB;
+	position: relative;
+}
+
+#header .logo{
+	width: 103px;
+	height: 103px;
+	background: url(../images/logo.png) left top no-repeat;
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#header .webname{
+	position: absolute;
+	top: -10px;
+	left: 140px;
+	font-size: 36px;
+	color: #FFF;
+	font-weight: bold;
+}
+
+#content{
+	background-color: #FFF;
+	min-height: 300px;
+	padding: 10px 20px;
+	font-size: 13px;
+	color: #666;
+	
+}
+
+#content h1{
+	font-size: 24px;
+	padding: 5px 0px;
+	
+}
+
+#left{
+	width: 70%;
+	margin: 20px 0px;
+	text-align:justify;
+	float: left;
+}
+
+#right{
+	width: 26%;	
+	margin: 20px 0px;
+	text-align:justify;
+	border-left: 2px solid #999;
+	height: 300px;
+	float: right;
+	padding-left: 10px;
+}
+
+#left p, #right p{
+	margin: 5px 0px 20px 0px;	
+	line-height: 16px;
+}
+
+#footer{
+	height: 100px;
+	background-color: #2A75AB;
+}

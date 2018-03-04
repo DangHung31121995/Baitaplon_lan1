@@ -1,0 +1,288 @@
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:focus, a:hover{
+    text-decoration:none;
+}
+
+a:active  {
+    text-decoration: none;
+}
+
+.heading{
+    margin-top: 10px;
+}
+.signup_forgot{
+    margin-left: 20px;
+}
+.form-login{
+    margin-top: 10px;
+}
+li.nav-item{
+    padding-left: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+form.form-row.col-md-7.form-login {
+    margin-top: 35px;
+    padding-left: 90px;
+}
+
+
+
+.container.booking {
+    margin-top: 25px;
+}
+.typehotel{
+    
+    font-size: 15px;
+    font-weight: bold;
+}
+.bottom{
+    margin-top: 50px;
+}
+
+.row.thongtinlienhe {
+    margin-top: 40px;
+    margin-left: 2px;
+}
+
+table {
+    margin-top: 10px;
+
+}
+
+.container.footer {
+    margin-bottom: 30px;
+}
+
+.row.form-step1 {
+    margin-top: 30px;
+}
+
+.fullcontainer.content {
+    margin-top: 40px;
+}
+.container.content {
+    margin-top: 40px;
+}
+
+h2.tieude {
+    color: darkred;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+p.noidung {
+    text-align: justify;
+}
+
+a.btn.btn-primary.btnaccount {
+    margin-top: 20px;
+}
+
+
+
+form.form-tttk {
+    display: grid;
+}
+
+.row.content_tttk {
+    margin-bottom: 80px;
+}
+
+.row.table_his {
+    margin: auto;
+    margin-top:60px;
+
+}
+
+img.img_hotel {
+    float: left;
+}
+
+.thongtinhotel {
+    margin-left: 135px;
+    margin-top: 10px;
+}
+
+p.name_hotel {font-weight: bold;color: #dd7a32;text-transform: uppercase;}
+
+p.address_hotel {
+    text-align: justify;
+    margin-top: -15px;
+}
+
+.row.col-md-12.namecity {
+    /* margin-top: 20px; */
+    margin-bottom: 20px;
+    background: #ffd9ff47;
+}   a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:focus, a:hover{
+    text-decoration:none;
+}
+
+a:active  {
+    text-decoration: none;
+}
+
+.heading{
+    margin-top: 10px;
+}
+.signup_forgot{
+    margin-left: 20px;
+}
+.form-login{
+    margin-top: 10px;
+}
+li.nav-item{
+    padding-left: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+form.form-row.col-md-7.form-login {
+    margin-top: 35px;
+    padding-left: 90px;
+}
+
+
+
+.container.booking {
+    margin-top: 25px;
+}
+.typehotel{
+    
+    font-size: 15px;
+    font-weight: bold;
+}
+.bottom{
+    margin-top: 50px;
+}
+
+.row.thongtinlienhe {
+    margin-top: 40px;
+    margin-left: 2px;
+}
+
+table {
+    margin-top: 10px;
+
+}
+
+.container.footer {
+    margin-bottom: 30px;
+}
+
+.row.form-step1 {
+    margin-top: 30px;
+}
+
+.fullcontainer.content {
+    margin-top: 40px;
+}
+.container.content {
+    margin-top: 40px;
+}
+
+h2.tieude {
+    color: darkred;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+p.noidung {
+    text-align: justify;
+}
+
+a.btn.btn-primary.btnaccount {
+    margin-top: 20px;
+}
+
+
+
+form.form-tttk {
+    display: grid;
+}
+
+.row.content_tttk {
+    margin-bottom: 80px;
+}
+
+.row.table_his {
+    margin: auto;
+    margin-top:60px;
+
+}
+
+img.img_hotel {
+    float: left;
+}
+
+.thongtinhotel {
+    margin-left: 135px;
+    margin-top: 10px;
+}
+
+p.name_hotel {font-weight: bold;color: #dd7a32;text-transform: uppercase;}
+
+p.address_hotel {
+    text-align: justify;
+    margin-top: -15px;
+}
+
+.row.col-md-12.namecity {
+    /* margin-top: 20px; */
+    margin-bottom: 20px;
+    background: #ffd9ff47;
+}   
+
+.row.item_city {
+    /* margin: auto; */
+    margin-left: 3%;
+    /* margin-right: 0%; */
+}
+
+h2.namecity_1 {
+    /* float: left; */
+    color: red;
+    font-family: serif;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.col-md-4.item_hotel {
+    /* margin: 5px 5px 5px 5px; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+a.tieude {
+    text-transform: uppercase;
+    color: #ff2f2f;
+}
+
+h3.tieude_detail {
+    text-transform: uppercase;
+    margin: auto;
+}
+
+p.content_detail {
+    text-align: justify;
+    /* margin-left: 10%; */
+}
+
+.row.col-md-12 {}

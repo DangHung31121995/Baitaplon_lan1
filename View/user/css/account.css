@@ -1,0 +1,94 @@
+img{border:0px;}
+
+
+
+.hello{
+  height: 20px;
+  width:100px;
+  padding-left: 10px;
+  margin-left: 0px;
+  margin-bottom: 20px;
+}
+.taikhoan{
+  font-size: 15px;
+  margin-left: 410px;
+}
+input[name='action'] {
+  height: 20px;
+  font-size:12px;
+  margin-left:10px;
+  padding-bottom: 20px;
+}
+#head{
+  width:100%;
+  height:100%;
+  background-image:url(images/bg.gif);
+  margin-bottom: 0px;
+  padding: 10px;
+  background-position:top left;
+  background-repeat:repeat-x;
+}
+.lb11{
+  margin-top:10px;
+  margin-bottom:20px;
+}
+.ql{
+  border: 1px solid;
+  border-color: green;
+  border-radius: 5px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  text-align:center;
+  padding-right: 35px;
+}
+.ql1{
+  border: 1px;
+  text-align:center;
+  padding:10px;
+  margin-left: 10px;
+}
+.ql2{
+  width: 170px;
+}
+.he{
+  margin-top:35px;
+}
+.he1{
+  padding-right: 10px;
+  margin-top:35px;
+  padding-left: 100px;
+}
+.Up{
+  margin-top: 30px;
+  margin-left:170px;
+}
+.a2{
+  font-size: 12px;
+  margin-left:15px;
+  height: 28px;
+}
+.u{
+  padding-top:10px;
+}
+.i1{
+  width: 500px;
+}
+
+.hit-the-floor {
+color: #fff;
+font-weight: bold;
+font-family: Helvetica;
+text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}
+
+.hit-the-floor {
+  text-align: center;
+  font-size: 70px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
